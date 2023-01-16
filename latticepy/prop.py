@@ -12,7 +12,7 @@ def PseudoKD_CPU(field):
     
     # Kick
     if field.halfstep == 1:
-        field.psi    = np.exp(-1.j*0.5*field.dt*field.V)*field.psi
+        field.psi    = np.exp(-1.j*0.5*field.dt*field.R*field.V)*field.psi
         field.halfstep = 0
     else:
         field.psi    = np.exp(-1.j*field.dt*field.R*field.V)*field.psi
