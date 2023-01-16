@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#PBS -l select=1:ncpus=1:mem=1gb
+#PBS -l walltime=1:00:00
+
+# Packages for GPUs can be contained in a conda environment, otherwise comment this
+conda activate cenv
+
+# Modify the installation path 
+I_PATH=/home/z5278074/latticepy 
+cd $I_PATH/latticepy
+
+# Parameters
+NDIMS=3
+N=256
+DEV='gpu'
+
+
+#python3 main.py $NDIMS $N $DEV 
+python3 main.py 

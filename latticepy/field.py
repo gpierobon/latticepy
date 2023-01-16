@@ -17,6 +17,9 @@ class Field:
         self.icfile=ICFILE
         self.dt=dt
         self.tf=tf
+        self.halfstep=1
+        self.R=1
+        self.refR=REFR
         self.GN=G
     
     def create_Grid(self):

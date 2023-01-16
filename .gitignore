@@ -1,3 +1,6 @@
 __pycache__
 latticepy_job
 latticepy_job.*
+tests/*.e*
+tests/*.o*
+tests/plots
