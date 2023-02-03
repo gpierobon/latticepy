@@ -19,16 +19,18 @@ if switch == True:
     G         = float(sys.argv[])
     '''
 else:
-    NDIMS     = 3                         # Grid dimension
-    N         = 256                       # Grid size
-    DEV       = 'gpu'                     # Device to use ('cpu' or 'gpu')
+    SAVEDIR   = 'tests/sim1'
+    NDIMS     = 2                         # Grid dimension
+    N         = 256                      # Grid size
+    DEV       = 'cpu'                     # Device to use ('cpu' or 'gpu')
     PREC      = 'single'                  # Floating point precision ('single' or 'double')
     VERB      = 'normal'                  # Verbosity in the printing outputs ('silent' or 'normal')
     ICTYPE    = 'solitons'                # Initial conditions type ('solitons' or ...)
     ICFILE    = 'solitons.txt'            # File to read in IC if applicable
     L         = 1                         # Box size in physical coordinates
-    REFR      = 'MRE'                     # Hubble expansion ('MRE' or 'RD' or 'MD' or 'static')
-    dt        = L/N/4.                    # Timestep
+    AREF      = 'Static'                  # Hubble expansion ('MRE' or 'RD' or 'MD' or 'static')
+    RDT       = 10.                       # Spacestep to timestep ratio
+    dt        = L/N/RDT                   # Timestep
     t         = 0                         # Initial time 
     tf        = 0.5                       # Final time
-    G         = 4000                      # Newton's constant   
+    NORM      = 4000                      # Normalisation constant 

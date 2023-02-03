@@ -14,7 +14,7 @@ import ic
 import params 
 import utils
 from prop import propagate
-import plotting
+import plotting as pl 
 from field import *
 
 if params.DEV == 'gpu':
@@ -27,34 +27,27 @@ def main():
     start = time.time()
 
     field = Field()
-
+    field.start_run()
     utils.banner()
     utils.summary(field)  
 
-    ic.create_ic(field)
-    
-    # Implement flag here
-    flag = False
-    if flag == True:
-        if field.device == 'gpu':
-            field.copy_to_host()
-        plotting.singleplot(field,channel='psi')
-    
+    ic.create_ic(field) 
     field.set_k2()
     field.set_potential()
      
-    Nsteps = utils.set_steps(field)
+    if field.device == 'gpu':
+        field.copy_to_host()
+    pl.singleplot(field,0,channel='psi')
+    
+    field.set_steps()
 
-    for i in tq(range(Nsteps)):
+    print("Main loop ...")
+    for i in tq(range(field.steps)):
         propagate(field)
 
-    # Implement another flag here
-    flagf = True
-    if flagf == True:
-        if field.device == 'gpu':
-            field.copy_to_host()
-        plotting.singleplot(field,channel='psi')
-
+    if field.device == 'gpu':
+        field.copy_to_host()
+    pl.singleplot(field,i,channel='psi')
     print("Walltime: %.1f seconds"%(time.time()-start))
     return 0
 

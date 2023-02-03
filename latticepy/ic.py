@@ -29,7 +29,6 @@ def solitons_file(field):
     rho = 0.5
     path = os.path.abspath(os.path.join(os.getcwd(), os.pardir))
     lines = np.loadtxt('%s/files/%s'%(path,field.icfile))
-    #lines = np.loadtxt('/home/gio/Desktop/solitons.txt')
 
     amp_l = []; sig_l = [] 
     xc = []; yc = []; zc = []
