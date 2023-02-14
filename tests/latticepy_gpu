@@ -10,7 +10,6 @@ conda activate cenv
 
 # Modify the installation path 
 I_PATH=/home/z5278074/latticepy 
-cd $I_PATH/latticepy
+cd $I_PATH
 
-
-python3 main.py
+python3 main_SP.py 

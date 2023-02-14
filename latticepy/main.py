@@ -30,8 +30,13 @@ def main():
     field.start_run()
     utils.banner()
     utils.summary(field)  
-
-    ic.create_ic(field) 
+    
+    # Create/Read Initial conditions
+    if field.ictype == 'solitons':
+        ic.create_ic(field)
+    else:
+        ic.read_ic(field) 
+    
     field.set_k2()
     field.set_potential()
      

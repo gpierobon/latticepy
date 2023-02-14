@@ -100,7 +100,7 @@ class Field:
 
 
     def host_to_device(self):
-        pass
+        self.psi_d = cp.asarray(self.psi)
 
 
     def copy_to_host(self):

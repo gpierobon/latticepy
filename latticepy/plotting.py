@@ -5,7 +5,7 @@ import cmasher as cmr
 
 def set_plot_pars():
     plt.rcParams['axes.linewidth'] = 2
-    plt.rc('text', usetex=True)
+    #plt.rc('text', usetex=True)
     plt.rc('font', family='serif',size=15)
 
 def singleplot(field,index,channel='psi',label=False):

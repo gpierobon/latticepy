@@ -29,6 +29,7 @@ def PseudoKD(field):
         psihat = cp.fft.fftn(field.psi_d)
         psihat = cp.exp(field.dt * (-1.j*field.k2_d/2.))*psihat
         field.psi_d = cp.fft.ifftn(psihat)
+        field.updateR()
         Vhat = -cp.fft.fftn(4.0*np.pi*field.Norm*(np.abs(field.psi_d)**2-1.0)) / ( field.k2_d  + (field.k2_d==0))
         field.V_d = cp.real(cp.fft.ifftn(Vhat))
         field.psi_d = cp.exp(-1.j*field.dt/2.0*field.V_d)*field.psi_d

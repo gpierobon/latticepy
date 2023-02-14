@@ -1,29 +1,26 @@
 import os
 import time
+import h5py as h5
 import numpy as np
 
 path = os.path.abspath(os.path.join(os.getcwd(), os.pardir))
 
-'''
-def random(NDIMS,DEV):
-    return 
+def read_jaxions(field):
+    fname = field.icfile
+    f = h5.File('%s/files/%s'%(path,fname),'r')
+    m = np.array(f['m'])
+    v = np.array(f['v'])
+    field.ai = 0.01
+    field.psi = np.zeros_like(m).astype('complex64')
+    field.psi.real = field.ai**(3/2)/np.sqrt(2)*m
+    field.psi.imag = -field.ai**(3/2)/np.sqrt(2)*v
+    # Alternative?
+    #field.psi.real = np.sqrt(m**2+v**2)*field.ai**(3/2)
+    #field.psi.imag = 0
 
-def solitons_random(NDIMS,DEV,NSOL):
-    for i in range(NSOL):
-        if DEV == 'cpu':
-            if NDIMS == 2:
-                #write here
-            elif NDIMS === 3:
-                #write here
-            
-        elif DEV == 'gpu':
-            import cupy as cp
-            if NDIMS == 2:
-                #write here
-            elif NDIMS == 3:
-                #write here
-    return 
-'''
+    if field.device == 'gpu':
+        field.host_to_device()
+
 
 def solitons_file(field):
     rho = 0.5
@@ -60,6 +57,12 @@ def solitons_file(field):
             if field.prec == 'single':
                 field.psi_d = cp.sqrt(rho/cp.mean(rho)).astype('complex64')
     del rho,amp_l,sig_l,xc,yc,zc,xx,yy,zz
+
+def read_ic(field):
+   start = time.time()
+   read_jaxions(field)
+   if field.verb != 'silent':
+        print("IC took %.3f seconds\n"%(time.time()-start))
 
 
 def create_ic(field):
